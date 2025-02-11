@@ -1,43 +1,26 @@
 package main
 
- 
-
-type Item struct {
-
-	ShortDescription string `json:"shortDescription"`
-
-	Price            string `json:"price"`
-
-}
-
- 
-
+// To represents the structure of a receipt
 type Receipt struct {
-
-	Retailer     string  `json:"retailer"`
-
-	PurchaseDate string  `json:"purchaseDate"`
-
-	PurchaseTime string  `json:"purchaseTime"`
-
-	Items        []Item  `json:"items"`
-
-	Total        string  `json:"total"`
-
+Retailer     string `json:"retailer"`
+PurchaseDate string `json:"purchaseDate"`
+PurchaseTime string `json:"purchaseTime"`
+Total        string `json:"total"`
+Items        []Item `json:"items"`
 }
 
- 
-
-type ProcessReceiptResponse struct {
-
-	ID string `json:"id"`
-
+// To represents an individual item in the receipt
+type Item struct {
+ShortDescription string `json:"shortDescription"`
+Price            string `json:"price"`
 }
 
- 
-
-type PointsResponse struct {
-
-	Points int `json:"points"`
-
+// ReceiptData holds receipt ID and calculated points
+type ReceiptData struct {
+Receipt   Receipt `json:"receipt"`
+Points    int     `json:"points"`
+Breakdown string  `json:"breakdown"`
 }
+
+// In-memory storage
+var receipts = make(map[string]ReceiptData)
